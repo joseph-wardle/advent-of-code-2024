@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fs;
 
 fn main() {
-    let input = fs::read_to_string("data/input.txt").expect("Failed to read input file");
+    let input = fs::read_to_string("day_1/data/input.txt").expect("Failed to read input file");
     let result_part_1 = part_1(&input);
     println!("Part 1: {result_part_1}");
 
@@ -60,14 +60,14 @@ mod tests {
     use std::fs;
 
     #[test]
-    fn test_part_1() {
+    fn test_day_1_part_1() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_1(&input);
         assert_eq!(result, 11);
     }
 
     #[test]
-    fn test_part_2() {
+    fn test_day_1_part_2() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_2(&input);
         assert_eq!(result, 31);
