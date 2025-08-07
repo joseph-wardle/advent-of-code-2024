@@ -24,10 +24,7 @@ fn part_1(input: &str) -> u32 {
     left.sort_unstable();
     right.sort_unstable();
 
-    left.iter()
-        .zip(right)
-        .map(|(a, b)| a.abs_diff(b))
-        .sum()
+    left.iter().zip(right).map(|(a, b)| a.abs_diff(b)).sum()
 }
 
 fn part_2(input: &str) -> u32 {
