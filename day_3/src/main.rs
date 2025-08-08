@@ -21,8 +21,29 @@ fn part_1(input: &str) -> u32 {
         .sum()
 }
 
-fn part_2(_input: &str) -> u32 {
-    0
+fn part_2(input: &str) -> u32 {
+    let re = Regex::new(r"don't\(\)|do\(\)|mul\((\d{1,3}),(\d{1,3})\)").unwrap();
+
+    let mut enabled = true;
+    let mut sum = 0;
+
+    for caps in re.captures_iter(input) {
+        if let (Some(x), Some(y)) = (caps.get(1), caps.get(2)) {
+            if enabled {
+                let a: u32 = x.as_str().parse().unwrap();
+                let b: u32 = y.as_str().parse().unwrap();
+                sum += a * b;
+            }
+        } else {
+            match caps.get(0).unwrap().as_str() {
+                "don't()" => enabled = false,
+                "do()" => enabled = true,
+                _ => {}
+            }
+        }
+    }
+
+    sum
 }
 
 #[cfg(test)]
@@ -41,6 +62,6 @@ mod tests {
     fn test_day_3_part_2() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_2(&input);
-        assert_eq!(result, 0);
+        assert_eq!(result, 48);
     }
 }
