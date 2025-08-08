@@ -64,14 +64,14 @@ mod tests {
     use std::fs;
 
     #[test]
-    fn test_part_1() {
+    fn test_day_2_part_1() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_1(&input);
         assert_eq!(result, 2);
     }
 
     #[test]
-    fn test_part_2() {
+    fn test_day_2_part_2() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_2(&input);
         assert_eq!(result, 4);
