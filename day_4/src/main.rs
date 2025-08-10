@@ -58,8 +58,36 @@ fn part_1(input: &str) -> u32 {
     total
 }
 
-fn part_2(_input: &str) -> u32 {
-    0
+fn part_2(input: &str) -> u32 {
+    let grid: Vec<&[u8]> = input.lines().map(|l| l.as_bytes()).collect();
+    let rows = grid.len();
+    let cols = grid[0].len();
+
+    let mut total = 0;
+
+    for y in 1..(rows - 1) {
+        for x in 1..(cols - 1) {
+            if grid[y][x] != b'A' {
+                continue;
+            }
+
+            let top_left = grid[y - 1][x - 1];
+            let top_right = grid[y - 1][x + 1];
+            let bottom_left = grid[y + 1][x - 1];
+            let bottom_right = grid[y + 1][x + 1];
+
+            let diag1_ok = (top_left == b'M' && bottom_right == b'S')
+                || (top_left == b'S' && bottom_right == b'M');
+            let diag2_ok = (top_right == b'M' && bottom_left == b'S')
+                || (top_right == b'S' && bottom_left == b'M');
+
+            if diag1_ok && diag2_ok {
+                total += 1;
+            }
+        }
+    }
+
+    total
 }
 
 #[cfg(test)]
@@ -78,6 +106,6 @@ mod tests {
     fn test_day_4_part_2() {
         let input = fs::read_to_string("data/example.txt").unwrap();
         let result = part_2(&input);
-        assert_eq!(result, 0);
+        assert_eq!(result, 9);
     }
 }
